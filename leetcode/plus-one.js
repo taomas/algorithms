@@ -10,4 +10,23 @@
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 
- 
+ /**
+ * @param {number[]} digits
+ * @return {number[]}
+ */
+function plusOne(numbers) {
+  // 从最后一位开始遍历，给最后一位numbers[i]进行+1，小于10，则直接返回numbers[i]+1后的数组
+  // 大于10，numbers[i] = numbers[i] % 10，进一位
+  for(let i = numbers.length - 1; i >= 0; i--) {
+    numbers[i] = numbers[i] + 1
+    if (numbers[i] < 10) {
+      return numbers
+    } else {
+      numbers[i] = numbers[i] % 10
+    }
+  }
+  // 如果遍历完还没有小于10，则numbers[0]%10,进一位
+  numbers[0] = numbers[0] % 10
+  numbers.unshift(1)
+  return numbers
+}
