@@ -11,6 +11,9 @@
  *   [3,1,2],
  *   [3,2,1]
  * ]
+ * 
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/permutations/
  */
 
 // 添加一个swap方法，用于交换
@@ -21,23 +24,20 @@ function swap(nums, i, j) {
   nums[j] = temp
 }
 
-// 回溯法，对p-q之间的元素进行全排列，递归p+1
-function backtrack(nums, p, q, result) {
-  if (p === q) {
-    console.log('当前已全部排列完', nums)
-    result.push([...nums]) 
-  } else {
-    for (let i = p; i <= q; i++) {
-      swap(nums, i, p)
-      backtrack(nums, p + 1, q, result)
-      swap(nums, i, p)
+// 回溯法
+let permute = function(nums) {
+  let result = []
+  let backtrack = function(nums, start) {
+    if (start === nums.length - 1) {
+      result.push([...nums])
+    }
+    for (let i = start; i <= nums.length - 1; i++) {
+      swap(nums, i, start)
+      backtrack(nums.slice(), start + 1)
+      swap(nums, i, start)
     }
   }
-}
-
-var permute = function(nums) {
-  let result = []
-  backtrack(nums, 0, nums.length - 1, result)
+  backtrack(nums, 0)
   return result
 };
 
